@@ -1,0 +1,20 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local data and temporary files
+local_rag_db/
+tmp_page_*.png
+*.log
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# IDE and OS files
+.vscode/
+.DS_Store
+Thumbs.db
