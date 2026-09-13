@@ -1,2 +1,0 @@
-This sample document is for testing multimodal RAG.
-It describes product onboarding, customer support, and release notes.
