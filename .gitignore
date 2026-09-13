@@ -1,0 +1,16 @@
+# Secrets and local environment files
+.env
+.venv/
+venv/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+
+# Local RAG data and generated uploads
+rag.sqlite3
+uploads/
+
+# Editor and local workspace files
+.vscode/
+*.code-workspace
