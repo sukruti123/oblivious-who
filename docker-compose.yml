@@ -1,0 +1,18 @@
+services:
+  postgres_db:
+    image: ankane/pgvector
+    container_name: sovereign-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sovereign
+      POSTGRES_PASSWORD: sovereign_pass
+      POSTGRES_DB: sovereign_x
+    ports:
+      - "5432:5432"
+    volumes:
+      - sovereign-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  sovereign-postgres-data:
+    external: true
+    name: 2d6dd1b8c87500de661a514ecf056d3d680e116fab57a18c2dbc13f2e4e9f15d

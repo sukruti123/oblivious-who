@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # 1. PostgreSQL Database Service with pgvector pre-installed
+  postgres_db:
+    image: pgvector/pgvector:pg17
+    container_name: sovereign_x_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: your_secure_password_here
+      POSTGRES_DB: sovereign_x
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # 2. Visual Management UI (pgAdmin)
+  pgadmin_ui:
+    image: dpage/pgadmin4
+    container_name: sovereign_x_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@sovereign.local
+      PGADMIN_DEFAULT_PASSWORD: admin_ui_password_here
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres_db
+
+volumes:
+  pgdata:
