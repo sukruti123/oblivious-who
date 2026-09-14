@@ -1,15 +1,13 @@
 """PostgreSQL/pgvector storage for industrial multimodal RAG chunks."""
 
-import os
 from collections.abc import Sequence
 
 import psycopg
 from pgvector.psycopg import register_vector
 
 
-DB_CONNECTION_STRING = os.environ.get(
-    "DATABASE_URL",
-    "postgresql://postgres:your_secure_password_here@localhost:5432/sovereign_x",
+DB_CONNECTION_STRING = (
+    "postgresql://postgres:your_secure_password_here@localhost:5433/sovereign_x"
 )
 EMBEDDING_DIMENSIONS = 1536
 

@@ -15,10 +15,7 @@ except ImportError:
 # ------------------------------------------------------------------
 # Configuration & Database Setup
 # ------------------------------------------------------------------
-DB_URI = os.environ.get(
-    "DATABASE_URL",
-    "postgresql://postgres:your_secure_password_here@localhost:5432/sovereign_x",
-)
+DB_URI = "postgresql://postgres:sovereign_pass@localhost:5432/sovereign_x"
 KNOWLEDGE_DIR = "knowledge"
 
 # Initialize local embedding model (384 dimensions)
