@@ -31,7 +31,7 @@ def extract_text_tesseract(image_path: str) -> str:
 
 
 def extract_vision_qwen(
-    image_path: str, model_name: str = "llama3.2-vision:latest"
+    image_path: str, model_name: str = "qwen2-vl:7b"
 ) -> str:
     """Tier 2: Qwen2-VL vision model for handwritten logs & P&ID engineering schematics."""
     if not os.path.exists(image_path):
@@ -57,10 +57,10 @@ def extract_vision_qwen(
         if response.status_code == 200:
             result = response.json()
             return result.get("message", {}).get("content", "").strip()
-        return ""
+        else:
+            return f"Vision API error HTTP {response.status_code}"
     except Exception as e:
-        print(f"Vision model error: {e}")
-        return ""
+        return f"Failed to connect to local vision model: {e}"
 
 
 def process_multimodal_document(
@@ -77,9 +77,9 @@ def process_multimodal_document(
         return {"method": "Tesseract_OCR", "extracted_text": ocr_text}
 
     # Step 2: Fallback to Qwen2-VL / Qwen3-VL Vision Model
-    print("🟡 Tier 1 yield low. Falling back to Tier 2 (local vision model)...")
+    print("🟡 Tier 1 yield low. Falling back to Tier 2 (Qwen2-VL Vision)...")
     vlm_text = extract_vision_qwen(image_path)
-    return {"method": "Local_Vision_VLM", "extracted_text": vlm_text}
+    return {"method": "Qwen_Vision_VLM", "extracted_text": vlm_text}
 
 
 if __name__ == "__main__":

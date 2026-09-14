@@ -1,5 +1,4 @@
 import json
-import os
 from collections.abc import Mapping
 
 import psycopg
@@ -8,10 +7,7 @@ from pgvector.psycopg import register_vector
 from sentence_transformers import SentenceTransformer
 
 # Database & Embedding Configuration
-DB_URI = os.environ.get(
-    "DATABASE_URL",
-    "postgresql://postgres:your_secure_password_here@localhost:5432/sovereign_x",
-)
+DB_URI = "postgresql://sovereign:sovereign_pass@localhost:5432/sovereign_x"
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 MIN_CONFIDENCE = 0.35
 
@@ -71,9 +67,7 @@ def search_knowledge_base(query: str, top_k: int = 5) -> dict:
     if not results:
         return {
             "status": "insufficient_evidence",
-            "query": query,
             "message": "Local documents do not contain sufficient evidence to support this claim.",
-            "evidence_count": 0,
             "evidence": [],
         }
 
